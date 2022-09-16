@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Filtrage des signaux aléatoires &#8212; Traitement du Signal - Signaux et Systèmes Continus</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/mystyle-checkpoint.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Traitements non-linéaires" href="ch4intro.html" />
+    <link rel="prev" title="Filtrage des signaux déterministes" href="ch3sec2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/N7solo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Traitement du Signal - Signaux et Systèmes Continus</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenue au cours de Traitement du Signal
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch1intro.html">
+   Mathématiques pour le signal
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec1.html">
+     Espaces fonctionnels d’intérêt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec2.html">
+     Produit de convolution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec3.html">
+     Transformée de Fourier
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec4.html">
+     Fonctions spéciales
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch1sec5.html">
+     Formulaire et Tables des principales transformées de Fourier
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch2intro.html">
+   Signaux déterministes et aléatoires
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec1.html">
+     Signaux déterministes à énergie finie
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec2.html">
+     Signaux déterministes périodiques à puissance finie
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec3.html">
+     Signaux déterministes non périodiques à puissance finie
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec4.html">
+     Signaux aléatoires stationnaires
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch2sec5.html">
+     Propriétés de la fonction d’autocorrélation  et de la densité spectrale
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="ch3intro.html">
+   Filtrage linéaire invariant par décalage
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec1.html">
+     Systèmes à temps continu: définitions et propriétés
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch3sec2.html">
+     Filtrage des signaux déterministes
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Filtrage des signaux aléatoires
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch4intro.html">
+   Traitements non-linéaires
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec1.html">
+     Cas des signaux déterministes - exemple du quadrateur
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec2.html">
+     Cas des signaux aléatoires
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch4sec3.html">
+     Quantification
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="ch5intro.html">
+   Pour aller plus loin
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec1.html">
+     Ergodicité
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec2.html">
+     Filtrage adapté
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec3.html">
+     Filtrage de Wiener
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="ch5sec4.html">
+     Preuve du théorème de Price
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="biblio.html">
+   Bibliographie
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fch3sec3.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/ch3sec3.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   Définition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identification-d-une-operation-de-filtrage-lineaire-pour-les-signaux-aleatoires">
+   Identification d’une opération de filtrage linéaire pour les signaux aléatoires
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exemples">
+   Exemples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relations-de-wiener-lee">
+   Relations de Wiener-Lee
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Filtrage des signaux aléatoires</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   Définition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#identification-d-une-operation-de-filtrage-lineaire-pour-les-signaux-aleatoires">
+   Identification d’une opération de filtrage linéaire pour les signaux aléatoires
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exemples">
+   Exemples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relations-de-wiener-lee">
+   Relations de Wiener-Lee
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="filtrage-des-signaux-aleatoires">
+<h1>Filtrage des signaux aléatoires<a class="headerlink" href="#filtrage-des-signaux-aleatoires" title="Permalink to this headline">#</a></h1>
+<section id="definition">
+<h2>Définition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 13 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Le filtrage des signaux aléatoires stationnaires est défini par une opération de convolution</p>
+<div class="math notranslate nohighlight">
+\[y(t)=x(t)*h(t)= \int_{\mathbb{R}} x(s) h(t-s) ds = \int_{\mathbb{R}} h(s) x(t-s) ds = h(t)*x(t).\]</div>
+<p>où les intégrales sont définies au sens de la **convergence en moyenne quadratique</p>
+</section>
+</div></section>
+<section id="identification-d-une-operation-de-filtrage-lineaire-pour-les-signaux-aleatoires">
+<h2>Identification d’une opération de filtrage linéaire pour les signaux aléatoires<a class="headerlink" href="#identification-d-une-operation-de-filtrage-lineaire-pour-les-signaux-aleatoires" title="Permalink to this headline">#</a></h2>
+<p>Pour identifier une opération de filtrage linéaire, on peut utiliser le fait qu’il existe une <strong>isométrie</strong> entre l’ensemble des signaux aléatoires engendrés par un processus aléatoire stationnaire <span class="math notranslate nohighlight">\(x(t)\)</span> (i.e., l’ensemble des combinaisons linéaires de la forme <span class="math notranslate nohighlight">\(\sum_{k=1}^N a_k x(t_k)\)</span> et des limites des suites de variables aléatoires ayant cette forme notées <span class="math notranslate nohighlight">\(\lim\limits_{n \to +\infty}  \sum_{k_n=1}^{N_n} a_{k_n} x(t_{k_n})\)</span>) et l’ensemble des fonctions à valeurs complexes engendrées par <span class="math notranslate nohighlight">\(\exp(j2 \pi ft)\)</span> (i.e., l’ensemble des combinaisons linéaires de la forme <span class="math notranslate nohighlight">\(\sum_{k=1}^N a_k \exp(2 \pi f t_k)\)</span> et des limites des suites de
+variables aléatoires ayant cette forme notées <span class="math notranslate nohighlight">\(\lim\limits_{n \to +\infty}  \sum_{k_n=1}^{N_n} a_{k_n} \exp(2 \pi f t_{k_n})\)</span>).
+L’espace des signaux aléatoires engendré par <span class="math notranslate nohighlight">\(x(t)\)</span> est muni du produit scalaire</p>
+<div class="math notranslate nohighlight">
+\[\langle u(t), v(t) \rangle_1 = E[u(t) v^*(t)]\]</div>
+<p>tandis que l’espace des fonctions complexes engendré par <span class="math notranslate nohighlight">\(\exp(j2 \pi ft)\)</span> est muni du produit scalaire</p>
+<div class="math notranslate nohighlight">
+\[\langle a(t), b(t) \rangle_2 = \int_{\mathbb{R}} a(t) b^*(t) s_x(f) df.\]</div>
+<p>Le fait qu’il existe une isométrie entre ces deux espaces découle de l’égalité suivante</p>
+<div class="math notranslate nohighlight">
+\[R_x(\tau) = E[ x(t) x^*(t-\tau)] =\langle x(t), x(t-\tau) \rangle_1\]</div>
+<p>et du fait que</p>
+<div class="math notranslate nohighlight">
+\[R_x(\tau) = \text{TF}^{-1}(s_x(f))=\int_{\mathbb {R}} s_x(f) \exp(j 2 \pi f \tau)df =\langle \exp(j 2 \pi f t), \exp(j 2 \pi f (t-\tau)) \rangle_2.\]</div>
+<p>Pour plus de détails, on pourra se reporter à l’excellent livre de Yaglom <span id="id1">[<a class="reference internal" href="biblio.html#id4" title="A. M. Yaglom. An Introduction to the Theory of Stationary Random Functions. Prentice Hall, Englewood Cliffs, N. J., 1962.">Yaglom, 1962</a>]</span>. On notera <span class="math notranslate nohighlight">\(x(t) \leftrightarrow \exp(j2 \pi ft)\)</span> le fait que <span class="math notranslate nohighlight">\(x(t)\)</span> admette <span class="math notranslate nohighlight">\(\exp(j2 \pi ft)\)</span> comme correspondance par l’isométrie. On en déduit</p>
+<div class="math notranslate nohighlight">
+\[x(t)*h(t)=\int_{\mathbb{R}} h(s) x(t-s) ds \leftrightarrow \int_{\mathbb{R}} h(s) \exp[ j 2 \pi f(t-s) ] ds = \exp(j2 \pi ft)H(f)\]</div>
+<p>qui caractérise l’opération de filtrage linéaire. On en déduit le résultat suivant</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Pour vérifier qu’une opération <span class="math notranslate nohighlight">\(y(t)=T[x(t)]\)</span> est une opération de filtrage linéaire, on remplace <span class="math notranslate nohighlight">\(x(t)\)</span> par <span class="math notranslate nohighlight">\(\exp (j 2 \pi f t)\)</span> dans l’expression de <span class="math notranslate nohighlight">\(y(t)\)</span> et on factorise par <span class="math notranslate nohighlight">\(\exp (j 2 \pi f t)\)</span>. Si le terme devant <span class="math notranslate nohighlight">\(\exp (j 2 \pi f t)\)</span> ne dépend que de <span class="math notranslate nohighlight">\(f\)</span> (et pas de <span class="math notranslate nohighlight">\(t\)</span> ), on le note <span class="math notranslate nohighlight">\(H(f)\)</span> et on a une opération de filtrage linéaire avec un filtre de transmittance <span class="math notranslate nohighlight">\(H(f)\)</span>. Si le terme devant <span class="math notranslate nohighlight">\(\exp (j 2 \pi f t)\)</span> dépend de <span class="math notranslate nohighlight">\(t\)</span>, on n’a pas une opération de filtrage linéaire.</p>
+</div>
+<p>Ce résultat peut également s’expliquer à l’aide de la notion de <strong>réponse harmonique</strong> : si on met un signal de fréquence <span class="math notranslate nohighlight">\(f_0\)</span> à
+l’entrée d’un filtre, i.e., <span class="math notranslate nohighlight">\(x(t)=\exp( 2 \pi f_0 t)\)</span>, la sortie du filtre est également une fréquence pure mais dont l’amplitude est la phase ont été modifiées par le filtre, i.e., <span class="math notranslate nohighlight">\(y(t)=H(f_0) \exp( 2 \pi f_0 t)\)</span>.</p>
+</section>
+<section id="exemples">
+<h2>Exemples<a class="headerlink" href="#exemples" title="Permalink to this headline">#</a></h2>
+<div class="proof example admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">Example 5 </span> (Filtre dérivateur. )</p>
+<section class="example-content" id="proof-content">
+<p>Soit le système défini par <span class="math notranslate nohighlight">\(y(t)=x'(t)\)</span> tel que</p>
+<div class="math notranslate nohighlight">
+\[x'(t)=\lim\limits_{h \to 0} \frac{x(t+h)-x(t)}{h} \leftrightarrow \lim\limits_{h \to 0} \frac{\exp(j2 \pi f(t+h))-\exp(j 2 \pi ft)}{h}=(j2\pi f) \exp(j2 \pi ft).\]</div>
+<p>Comme <span class="math notranslate nohighlight">\(H(f)=j2\pi f\)</span> est indépendant de <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(y(t)=x'(t)\)</span> est la sortie d’un filtre linéaire de transmittance <span class="math notranslate nohighlight">\(H(f)=j2 \pi f\)</span> (appelé filtre dérivateur.</p>
+</section>
+</div><div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">Example 6 </span> (Filtre multi-trajets. )</p>
+<section class="example-content" id="proof-content">
+<p>On considère le système défini par l’équation d’observation suivante :</p>
+<div class="math notranslate nohighlight">
+\[y(t)=\sum_{k=1}^K a_k x(t-t_k).\]</div>
+<p>On a alors</p>
+<div class="math notranslate nohighlight">
+\[y(t) \leftrightarrow \sum_{k=1}^K a_k \exp(j 2 \pi f(t-t_k)) = \exp( 2 \pi f t) \sum_{k=1}^K a_k \exp(j2 \pi f t_k)\]</div>
+<p>Comme <span class="math notranslate nohighlight">\(H(f)=\sum_{k=1}^K a_k \exp(j2 \pi f t_k)\)</span> est indépendant de <span class="math notranslate nohighlight">\(t\)</span>, on a une opération de de filtrage linéaire avec un filtre de
+transmittance <span class="math notranslate nohighlight">\(H(f)\)</span> (appelé filtre multi-trajets).</p>
+</section>
+</div><div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 7 </span></p>
+<section class="example-content" id="proof-content">
+<p>On considère maintenant le système suivant :</p>
+<div class="math notranslate nohighlight">
+\[y(t)=x(t)m(t)\]</div>
+<p>avec <span class="math notranslate nohighlight">\(m(t)\)</span> indépendant de <span class="math notranslate nohighlight">\(x(t)\)</span> tel que</p>
+<div class="math notranslate nohighlight">
+\[x(t)m(t)  \leftrightarrow \exp(j2 \pi ft) m(t).\]</div>
+<p>La correspondance de <span class="math notranslate nohighlight">\(x(t)m(t)\)</span> ne peut pas s’écrire <span class="math notranslate nohighlight">\(\exp(j2 \pi ft)H(f)\)</span> car <span class="math notranslate nohighlight">\(m(t)\)</span> est une fonction de <span class="math notranslate nohighlight">\(t\)</span> (et pas de <span class="math notranslate nohighlight">\(f\)</span>)
+donc l’opération qui à <span class="math notranslate nohighlight">\(x(t)\)</span> associe <span class="math notranslate nohighlight">\(x(t)m(t)\)</span> n’est pas une opération de filtrage linéaire.</p>
+</section>
+</div></section>
+<section id="relations-de-wiener-lee">
+<h2>Relations de Wiener-Lee<a class="headerlink" href="#relations-de-wiener-lee" title="Permalink to this headline">#</a></h2>
+<p>Les relations de Wiener-Lee sont valables pour des signaux aléatoires stationnaires, comme le montre cette partie. On a alors les expressions suivantes :</p>
+<ul>
+<li><p><span style="color:rgba(var(--pst-color-link),1)"> <strong>Intercorrélation :</strong> </span></p>
+<div class="math notranslate nohighlight">
+\[\boxed{R_{yx}(\tau)=R_x(\tau) * h(\tau)}\]</div>
+</li>
+<li><p><span style="color:rgba(var(--pst-color-link),1)"> <strong>Autocorrélation :</strong></span></p>
+<div class="math notranslate nohighlight">
+\[\boxed{R_y(\tau) = R_x(\tau) * h(\tau) * h^*(-\tau)}\]</div>
+</li>
+<li><p><span style="color:rgba(var(--pst-color-link),1)"> <strong>Densité spectrale de puissance :</strong></span></p>
+<div class="math notranslate nohighlight">
+\[\boxed{s_y(f)=s_x(f) |H(f)|^2}\]</div>
+</li>
+<li><p><span style="color:rgba(var(--pst-color-link),1)"> <strong>Moyenne :</strong></span></p>
+<p>La moyenne de la sortie d’un filtre vérifie la relation suivante</p>
+<div class="math notranslate nohighlight">
+\[\boxed{E[y(t)]=H(0) E[x(t)]}\]</div>
+</li>
+<li><p><span style="color:rgba(var(--pst-color-link),1)"> <strong>Formule des interférences :</strong></span></p>
+<p>Cette formule exprime l’intercorrélation entre les sorties de deux filtres de transmittances <span class="math notranslate nohighlight">\(H_1(f)\)</span> et <span class="math notranslate nohighlight">\(H_2(f)\)</span> de même entrée
+<span class="math notranslate nohighlight">\(x(t)\)</span>. Ces deux sorties sont donc définies pas <span class="math notranslate nohighlight">\(y_1(t)=x(t)*h_1(t)\)</span> et <span class="math notranslate nohighlight">\(y_2(t)=x(t)*h_2(t)\)</span> et on a</p>
+<div class="math notranslate nohighlight">
+\[\boxed{E[y_1(t)y_2^*(t-\tau)]=\int_{\mathbb{R}} H_1(f) H_2^*(f) \exp(j 2 \pi f \tau)s_x(f) df.}\]</div>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="ch3sec2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Filtrage des signaux déterministes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="ch4intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Traitements non-linéaires</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By J-Y. Tourneret et C. Poulliat<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
